@@ -10,4 +10,4 @@ add_executable(algorithm-project
         algorithm-project/AdjacencyListGraph.h
         algorithm-project/AdjacencyMatrixGraph.cpp
         algorithm-project/AdjacencyMatrixGraph.h
-        algorithm-project/main.cpp)
+        algorithm-project/main.cpp algorithm-project/PriorityQueueHeap.cpp algorithm-project/PriorityQueueHeap.h)

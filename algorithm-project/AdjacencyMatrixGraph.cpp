@@ -27,6 +27,7 @@ bool AdjacencyMatrixGraph::isAdjacent(int u, int v)
 }
 
 // Read edges from file
+// validate no negative and negative edges
 void AdjacencyMatrixGraph::load(istream& in)
 {
     string line;
@@ -34,6 +35,10 @@ void AdjacencyMatrixGraph::load(istream& in)
     while (!in.eof( ))
     {
         in >> i >> j >> weight;
+        if (weight < 0 || isAdjacent(i,j))
+        {
+            throw invalid_argument("One of the edges in the file is invalid");
+        }
         addEdge(i, j, weight);
     }
 }

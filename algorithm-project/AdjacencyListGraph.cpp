@@ -49,7 +49,10 @@ void AdjacencyListGraph::load(istream& in)
 	while (!in.eof())
 	{
 		in >> i >> j >> weight;
-		this->addEdge(i, j, weight);
+        if (weight < 0 || isAdjacent(i,j)){
+            throw invalid_argument("One of the edges in the file is invalid");
+        }
+        this->addEdge(i, j, weight);
 	}
 }
 
