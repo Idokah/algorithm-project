@@ -14,6 +14,7 @@ private:
     Node* head, * tail;
 public:
     LinkedList();
+    ~LinkedList();
     void addNode(int edge, int weight);
     void deleteNode(int vertex);
     bool isVertexExist(int vertex);

@@ -5,7 +5,7 @@ using namespace std;
 class AdjacencyListGraph
 {
 private:
-	LinkedList* adjacencyListArray;
+	LinkedList** adjacencyListArray;
 	int numVertices;
 public:
 	AdjacencyListGraph(int n);

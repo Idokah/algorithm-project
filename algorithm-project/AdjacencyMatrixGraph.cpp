@@ -60,7 +60,7 @@ public:
     // Print the martix
     void toString() 
     {
-        for (int i = 0; i < numVertices; i++) 
+        for (int i = 0; i < numVertices; i++)
         {
             cout << i << " : ";
             for (int j = 0; j < numVertices; j++)
