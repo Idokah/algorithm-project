@@ -143,12 +143,14 @@
     <ClCompile Include="AdjacencyMatrixGraph.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PriorityQueueArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdjacencyListGraph.h" />
     <ClInclude Include="AdjacencyMatrixGraph.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="PriorityQueueArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

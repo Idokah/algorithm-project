@@ -62,25 +62,12 @@ void AdjacencyMatrixGraph::toString()
     }
 }
 
-<<<<<<< HEAD
-    // Print the martix
-    void toString() 
-    {
-        for (int i = 0; i < numVertices; i++)
-        {
-            cout << i << " : ";
-            for (int j = 0; j < numVertices; j++)
-                cout << adjMatrix[i][j] << " ";
-            cout << endl;
-        }
-=======
 LinkedList AdjacencyMatrixGraph::getAdjList(int u)
 {
     LinkedList lst;
     for (int i = 0; i < numVertices; i++) {
         if (isAdjacent(u, i))
             lst.addNode(i, adjMatrix[u][i]);
->>>>>>> 79e1acff4d73fe02b022d7da660c23fb6451d05e
     }
     return lst;
 }

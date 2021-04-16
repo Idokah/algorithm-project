@@ -6,7 +6,7 @@ private:
 	int* arr;
 	int size;
 	int minIndex;
-	int updateMinIndex();
+	void updateMinIndex();
 public:
 	PriorityQueueArray(int* arr,int n);
 	void Build(int* arr);
@@ -14,4 +14,5 @@ public:
 	bool isEmpty();
 	void decreaseKey(int place, int newKey);
 	int getSize();
+	
 };

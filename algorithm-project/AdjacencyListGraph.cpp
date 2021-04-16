@@ -42,4 +42,14 @@ LinkedList AdjacencyListGraph::getAdjList(int u)
 	return *adjacencyListArray[u];
 }
 
+void AdjacencyListGraph::load(istream& in)
+{
+	string line;
+	int i, j, weight;
+	while (!in.eof())
+	{
+		in >> i >> j >> weight;
+		this->addEdge(i, j, weight);
+	}
+}
 

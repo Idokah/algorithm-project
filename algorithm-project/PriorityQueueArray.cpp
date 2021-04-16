@@ -1,6 +1,6 @@
 #include "PriorityQueueArray.h"
 
-int PriorityQueueArray::updateMinIndex()
+void PriorityQueueArray::updateMinIndex()
 {
 	bool firstFound = false;
 	this->minIndex = 0;

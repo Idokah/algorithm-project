@@ -1,4 +1,5 @@
 #pragma once
+#include <fstream>
 #include "LinkedList.h"
 using namespace std;
 
@@ -15,4 +16,5 @@ public:
 	bool isAdjacent(int u, int v);
 	void removeEdge(int u, int v);
 	LinkedList getAdjList(int u);
+	void load(istream& in);
 };
