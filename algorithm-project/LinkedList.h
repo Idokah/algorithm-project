@@ -4,7 +4,7 @@ using namespace std;
 struct Node
 {
     int vertex;
-    int weight;
+    float weight;
     Node* next;
 };
 
@@ -15,7 +15,10 @@ private:
 public:
     LinkedList();
     ~LinkedList();
-    void addNode(int edge, int weight);
+    void operator=(const LinkedList& other);
+    void addNode(int edge, float weight);
+    Node* getHead();
     void deleteNode(int vertex);
     bool isVertexExist(int vertex);
+    void toString();
 };

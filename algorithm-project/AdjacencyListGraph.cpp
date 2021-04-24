@@ -1,45 +1,46 @@
 #include "AdjacencyListGraph.h"
 
-AdjacencyListGraph::AdjacencyListGraph(int n) : numVertices(n)
+AdjacencyListGraph::AdjacencyListGraph(int n) : Graph(n)
 {
-	MakeEmptyGraph(n);
+	MakeEmptyGraph();
 }
 
 AdjacencyListGraph::~AdjacencyListGraph()
 {
-	for (int i = 0; i < this->numVertices; ++i)
+	for (int i = 0; i < this->n; ++i)
 	{
 		delete (this->adjacencyListArray[i]);
 	}
 }
 
-void AdjacencyListGraph::MakeEmptyGraph(int n)
+void AdjacencyListGraph::MakeEmptyGraph()
 {
-	this->adjacencyListArray = new LinkedList* [n];
-	for (int i = 0; i < i < n; ++i)
+	// TODO - maybe check if already allocated and free if so 
+	this->adjacencyListArray = new LinkedList* [this->n];
+	for (int i = 0; i < this->n; ++i)
 	{
-		this->adjacencyListArray[i] = new LinkedList;
+		this->adjacencyListArray[i] = new LinkedList();
 	}
 }
 
-void AdjacencyListGraph::addEdge(int u, int v, int weight)
+void AdjacencyListGraph::addEdge(int u, int v, float weight)
 {
-	this->adjacencyListArray[u]->addNode(v, weight);
+	this->adjacencyListArray[u-1]->addNode(v, weight);
 }
 
 bool AdjacencyListGraph::isAdjacent(int u, int v)
 {
-	return adjacencyListArray[u]->isVertexExist(v);
+	return adjacencyListArray[u-1]->isVertexExist(v);
 }
 
 void AdjacencyListGraph::removeEdge(int u, int v)
 {
-	adjacencyListArray[u]->deleteNode(v);
+	adjacencyListArray[u-1]->deleteNode(v);
 }
 
-LinkedList AdjacencyListGraph::getAdjList(int u)
+LinkedList* AdjacencyListGraph::getAdjList(int u)
 {
-	return *adjacencyListArray[u];
+	return adjacencyListArray[u-1];
 }
 
 void AdjacencyListGraph::load(istream& in)
@@ -53,6 +54,16 @@ void AdjacencyListGraph::load(istream& in)
             throw invalid_argument("One of the edges in the file is invalid");
         }
         this->addEdge(i, j, weight);
+	}
+}
+
+void AdjacencyListGraph::toString()
+{
+	for (int i = 0; i < this->n; ++i)
+	{
+		cout << i + 1 << " :";
+		this->adjacencyListArray[i]->toString();
+		cout << endl;
 	}
 }
 

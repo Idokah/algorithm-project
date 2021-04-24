@@ -4,26 +4,24 @@ int NO_EDGE = -1; // We are assuming all the weight in the graph is not negative
 
 
 // Initialize the matrix to zero
-AdjacencyMatrixGraph::AdjacencyMatrixGraph(int numVertices)
+AdjacencyMatrixGraph::AdjacencyMatrixGraph(int n) : Graph(n)
 {
-    makeEmptyGraph(numVertices);
+    adjMatrix = new int* [this->n];
+    for (int i = 0; i < this->n; i++)
+        adjMatrix[i] = new int[this->n];
+    makeEmptyGraph();
 }
 
-void AdjacencyMatrixGraph::makeEmptyGraph(int numVertices)
+void AdjacencyMatrixGraph::makeEmptyGraph()
 {
-    this->numVertices = numVertices;
-    adjMatrix = new int*[numVertices];
-    for (int i = 0; i < numVertices; i++)
-    {
-        adjMatrix[i] = new int[numVertices];
-        for (int j = 0; j < numVertices; j++)
+    for (int i = 0; i < this->n; i++)
+        for (int j = 0; j < this->n; j++)
             adjMatrix[i][j] = NO_EDGE;
-    }
 }
 
 bool AdjacencyMatrixGraph::isAdjacent(int u, int v)
 {
-    return (adjMatrix[u][v] != NO_EDGE);
+    return (this->adjMatrix[u-1][v-1] != NO_EDGE);
 }
 
 // Read edges from file
@@ -34,52 +32,52 @@ void AdjacencyMatrixGraph::load(istream& in)
     int i, j, weight;
     while (!in.eof( ))
     {
-        in >> i >> j >> weight;
+         in >> i >> j >> weight;
         if (weight < 0 || isAdjacent(i,j))
         {
             throw invalid_argument("One of the edges in the file is invalid");
         }
-        addEdge(i, j, weight);
+        this->addEdge(i, j, weight);
     }
 }
 
 // Add edges
-void AdjacencyMatrixGraph::addEdge(int i, int j, int c)
+void AdjacencyMatrixGraph::addEdge(int u, int v, float weight)
 {
-    adjMatrix[i][j] = c;
+    adjMatrix[u-1][v-1] = weight;
 }
 
 // Remove edges
 void AdjacencyMatrixGraph::removeEdge(int i, int j)
 {
-    adjMatrix[i][j] = NO_EDGE;
+    adjMatrix[i-1][j-1] = NO_EDGE;
 }
 
 // Print the martix
 void AdjacencyMatrixGraph::toString()
 {
-    for (int i = 0; i < numVertices; i++)
+    for (int i = 0; i < this->n; i++)
     {
-        cout << i << " : ";
-        for (int j = 0; j < numVertices; j++)
+        cout << i + 1 << " : ";
+        for (int j = 0; j < this->n; j++)
             cout << adjMatrix[i][j] << " ";
         cout << endl;
     }
 }
 
-LinkedList AdjacencyMatrixGraph::getAdjList(int u)
+LinkedList* AdjacencyMatrixGraph::getAdjList(int u)
 {
-    LinkedList lst;
-    for (int i = 0; i < numVertices; i++) {
-        if (isAdjacent(u, i))
-            lst.addNode(i, adjMatrix[u][i]);
+    LinkedList* lst = new LinkedList;
+    for (int i = 1; i <= this->n; i++) {
+        if (this->isAdjacent(u, i))
+            lst->addNode(i, adjMatrix[u-1][i-1]);
     }
     return lst;
 }
 
 AdjacencyMatrixGraph::~AdjacencyMatrixGraph()
 {
-    for (int i = 0; i < numVertices; i++)
+    for (int i = 0; i < this->n; i++)
         delete[] adjMatrix[i];
     delete[] adjMatrix;
 }

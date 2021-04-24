@@ -20,23 +20,33 @@ LinkedList::~LinkedList()
     }
 }
 
-void LinkedList::addNode(int vertex,int weight)
+void LinkedList::operator=(const LinkedList& other)
+{
+    this->head = other.head;
+    this->tail = other.tail;
+}
+
+void LinkedList::addNode(int vertex, float weight)
 {
     Node* tmp = new Node;
     tmp->weight = weight;
     tmp->vertex = vertex;
     tmp->next = nullptr;
 
-    if (head == nullptr)
+    if (this->head == nullptr)
     {
-        head = tmp;
-        tail = tmp;
+        this->head = tmp;
+        this->tail = tmp;
     }
     else
     {
-        tail->next = tmp;
-        tail = tail->next;
+        this->tail->next = tmp;
+        this->tail = tail->next;
     }
+}
+Node* LinkedList::getHead()
+{
+    return this->head;
 }
 void LinkedList::deleteNode(int vertex)
 {
@@ -77,4 +87,14 @@ bool LinkedList::isVertexExist(int vertex)
         temp = temp->next;
     }
     return (temp ? true : false);
+}
+
+void LinkedList::toString()
+{
+    Node* curr = this->head;
+    while (curr != nullptr)
+    {
+        cout << curr->vertex << "(" << curr->weight << ")  ";
+        curr = curr->next;
+    }
 }

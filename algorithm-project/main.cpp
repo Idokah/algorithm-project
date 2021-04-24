@@ -1,6 +1,7 @@
 #include "main.h"
 #include "AdjacencyListGraph.h"
 #include "AdjacencyMatrixGraph.h"
+#include "Dijkstra.h"
 
 int main(int argc, char *argv[]){
     ifstream infile(argv[1], ios::binary);
@@ -10,16 +11,24 @@ int main(int argc, char *argv[]){
     }
 
     int numVertices, s, t;
-    infile.read(rcastc(&numVertices), sizeof(numVertices));
-    infile.read(rcastc(&s), sizeof(s));
-    infile.read(rcastc(&t), sizeof(t));
+    infile >> numVertices >> s >> t;
 
     AdjacencyMatrixGraph matrixGraph(numVertices);
+    matrixGraph.toString();
     matrixGraph.load(infile);
+    cout << endl << endl;
+    matrixGraph.toString();
 
     AdjacencyListGraph listGraph(numVertices);
+    infile.clear();
+    infile.seekg(0);
+    infile >> numVertices >> s >> t;
     listGraph.load(infile);
-
+    cout << endl << endl;
+    listGraph.toString();
     infile.close();
     outfile.close();
+
+    cout<<Dijkstra::dijkstraWithHeap(&matrixGraph, s, t);
+    Dijkstra::dijkstraWithHeap(&listGraph, s, t);
 }

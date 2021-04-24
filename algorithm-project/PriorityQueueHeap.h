@@ -7,7 +7,7 @@ using namespace std;
 
 struct VertexItem {
     int vertex;
-    int distance;
+    float distance;
 };
 
 class PriorityQueueHeap {
@@ -22,12 +22,13 @@ private:
     void fixHeap(int node);
     void swap(int item1, int item2);
 public:
-    PriorityQueueHeap(int max);
-    PriorityQueueHeap(VertexItem** arr, int n);
-    void build(int n);
+    //PriorityQueueHeap(int max);
+    //PriorityQueueHeap(VertexItem** arr, int n);
+    PriorityQueueHeap(int n, float* d);
+    void build();
     ~PriorityQueueHeap();
     VertexItem *min();
-    VertexItem *deleteMin();
+    int deleteMin();
     void insert(VertexItem *item);
     bool isEmpty();
     void makeEmpty();
