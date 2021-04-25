@@ -16,7 +16,8 @@ public:
 	void addEdge(int u, int v, float weight);
 	bool isAdjacent(int u, int v);
 	void removeEdge(int u, int v);
-	LinkedList* getAdjList(int u);
+    LinkedList* getAdjList(int u);
+    LinkedList* getAllEdges();
 	void load(istream& in);
 	void toString();
 };

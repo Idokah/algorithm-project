@@ -7,7 +7,7 @@ int main(int argc, char *argv[]){
     ifstream infile(argv[1], ios::binary);
     ofstream outfile(argv[2], ios::binary);
     if (!infile) {
-        throw invalid_argument("Error with outfile");
+        throw invalid_argument("Error with infile");
     }
 
     int numVertices, s, t;
@@ -29,6 +29,8 @@ int main(int argc, char *argv[]){
     infile.close();
     outfile.close();
 
-    cout<<Dijkstra::dijkstraWithHeap(&matrixGraph, s, t);
-    Dijkstra::dijkstraWithHeap(&listGraph, s, t);
+    //listGraph.getAllEdges();
+
+    cout<<Dijkstra::dijkstraWithHeap(&matrixGraph, s, t) << endl;
+    cout<<Dijkstra::dijkstraWithHeap(&listGraph, s, t) << endl;
 }

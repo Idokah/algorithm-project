@@ -1,23 +1,26 @@
 #pragma once
 using namespace std;
 
-struct Node
+struct Edge
 {
-    int vertex;
+    int srcVertex;
+    int dstVertex;
     float weight;
-    Node* next;
+    Edge* next;
 };
 
 class LinkedList
 {
 private:
-    Node* head, * tail;
+    Edge* head, *tail;
 public:
     LinkedList();
     ~LinkedList();
     void operator=(const LinkedList& other);
-    void addNode(int edge, float weight);
-    Node* getHead();
+    void addNode(float weight, int dstVertex, int srcVertex);
+    void addNode(Edge *newNode);
+    bool isEmpty();
+    Edge* getHead();
     void deleteNode(int vertex);
     bool isVertexExist(int vertex);
     void toString();

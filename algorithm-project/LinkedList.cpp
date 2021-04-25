@@ -12,9 +12,9 @@ LinkedList::LinkedList()
 
 LinkedList::~LinkedList()
 {
-    Node* curr = head;
+    Edge* curr = head;
     while (curr) {
-        Node* next = curr->next;
+        Edge* next = curr->next;
         delete curr;
         curr = next;
     }
@@ -26,36 +26,41 @@ void LinkedList::operator=(const LinkedList& other)
     this->tail = other.tail;
 }
 
-void LinkedList::addNode(int vertex, float weight)
+void LinkedList::addNode(float weight, int dstVertex, int srcVertex)
 {
-    Node* tmp = new Node;
-    tmp->weight = weight;
-    tmp->vertex = vertex;
-    tmp->next = nullptr;
+    Edge* newNode = new Edge;
+    newNode->weight = weight;
+    newNode->dstVertex = dstVertex;
+    newNode->srcVertex = srcVertex;
+    newNode->next = nullptr;
+    this->addNode(newNode);
+}
 
+void LinkedList::addNode(Edge *newNode) {
     if (this->head == nullptr)
     {
-        this->head = tmp;
-        this->tail = tmp;
+        this->head = newNode;
+        this->tail = newNode;
     }
     else
     {
-        this->tail->next = tmp;
+        this->tail->next = newNode;
         this->tail = tail->next;
     }
 }
-Node* LinkedList::getHead()
+
+Edge* LinkedList::getHead()
 {
     return this->head;
 }
-void LinkedList::deleteNode(int vertex)
+void LinkedList::deleteNode(int dstVertex)
 {
 
-    Node* temp = this->head;
-    Node* prev = nullptr;
+    Edge* temp = this->head;
+    Edge* prev = nullptr;
 
     // If head node itself holds the edge to be deleted
-    if (temp != nullptr && temp->vertex == vertex)
+    if (temp != nullptr && temp->dstVertex == dstVertex)
     {
         this->head = temp->next; // Changed head
         delete temp;        // free old head
@@ -65,7 +70,7 @@ void LinkedList::deleteNode(int vertex)
     // Else Search for the edge to be deleted,
     else
     {
-        while (temp != nullptr && temp->vertex != vertex)
+        while (temp != nullptr && temp->dstVertex != dstVertex)
         {
             prev = temp;
             temp = temp->next;
@@ -79,10 +84,10 @@ void LinkedList::deleteNode(int vertex)
         delete temp;
     }
 }
-bool LinkedList::isVertexExist(int vertex)
+bool LinkedList::isVertexExist(int dstVertex)
 {
-    Node* temp = this->head;
-    while (temp != nullptr && temp->vertex != vertex)
+    Edge* temp = this->head;
+    while (temp != nullptr && temp->dstVertex != dstVertex)
     {
         temp = temp->next;
     }
@@ -91,10 +96,14 @@ bool LinkedList::isVertexExist(int vertex)
 
 void LinkedList::toString()
 {
-    Node* curr = this->head;
+    Edge* curr = this->head;
     while (curr != nullptr)
     {
-        cout << curr->vertex << "(" << curr->weight << ")  ";
+        cout << curr->dstVertex << "(" << curr->weight << ")  ";
         curr = curr->next;
     }
+}
+
+bool LinkedList::isEmpty() {
+    return (this->getHead() == nullptr);
 }

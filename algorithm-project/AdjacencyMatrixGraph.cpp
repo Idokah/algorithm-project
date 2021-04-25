@@ -28,6 +28,7 @@ bool AdjacencyMatrixGraph::isAdjacent(int u, int v)
 // validate no negative and negative edges
 void AdjacencyMatrixGraph::load(istream& in)
 {
+    // TODO validate input structure
     string line;
     int i, j, weight;
     while (!in.eof( ))
@@ -70,7 +71,7 @@ LinkedList* AdjacencyMatrixGraph::getAdjList(int u)
     LinkedList* lst = new LinkedList;
     for (int i = 1; i <= this->n; i++) {
         if (this->isAdjacent(u, i))
-            lst->addNode(i, adjMatrix[u-1][i-1]);
+            lst->addNode(adjMatrix[u - 1][i - 1], i, u);
     }
     return lst;
 }
