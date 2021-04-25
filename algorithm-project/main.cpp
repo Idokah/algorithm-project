@@ -29,6 +29,8 @@ int main(int argc, char *argv[]){
     infile.close();
     outfile.close();
 
-    cout<<Dijkstra::dijkstraWithHeap(&matrixGraph, s, t);
-    Dijkstra::dijkstraWithHeap(&listGraph, s, t);
+    cout<<Dijkstra::dijkstraWithHeap(&matrixGraph, s, t)<<endl;
+    cout<<Dijkstra::dijkstraWithHeap(&listGraph, s, t);
+    cout<<Dijkstra::dijkstraWithArray(&matrixGraph, s, t) << endl;
+    
 }

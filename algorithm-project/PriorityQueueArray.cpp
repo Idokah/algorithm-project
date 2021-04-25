@@ -1,48 +1,59 @@
 #include "PriorityQueueArray.h"
 
+
 void PriorityQueueArray::updateMinIndex()
 {
 	bool firstFound = false;
 	this->minIndex = 0;
 	for (int i = 0; i < this->size; ++i)
 	{
-		if ((this->arr[i] != -1) && (!firstFound || arr[this->minIndex] > this->arr[i]))
-		{
-			firstFound = true;
-			this->minIndex = i;
-		}
+			if (this->flagsArr[i]) //is in the array
+			{
+				if ((this->arr[i] != -1) && (!firstFound || arr[this->minIndex] > this->arr[i]))
+				{
+					firstFound = true;
+					this->minIndex = i;
+				}
+			}
 	}
 }
 
-PriorityQueueArray::PriorityQueueArray(int* arr,int n) : size(n)
+PriorityQueueArray::PriorityQueueArray(float * arr,int n) : size(n) , deleted(0)
 {
+	this->flagsArr = new int(n);
 	Build(arr);
 }
-
-void PriorityQueueArray::Build(int* arr)
+PriorityQueueArray::~PriorityQueueArray() {
+	delete[] this->flagsArr;
+}
+void PriorityQueueArray::Build(float * arr)
 {
 	this->arr = arr;
+	for (int i = 0; i < this->size; ++i) this->flagsArr[i] = 1;
 	this->updateMinIndex();
 }
 
 int PriorityQueueArray::deleteMin()
 {
-	int min= arr[this->minIndex];
-	arr[this->minIndex] = -1;
+	int min= this->arr[this->minIndex];
+	this->arr[this->minIndex] = -1;
+	this->flagsArr[this->minIndex] = 0;
+	this->deleted++;
 	this->updateMinIndex();
-	return min;
+	return this->minIndex;
 }
 
 bool PriorityQueueArray::isEmpty()
 {
-	for (int i = 0; this->size; ++i)
+	return this->deleted == size;
+	/*for (int i = 0; this->size; ++i)
 	{
 		if (this->arr[i] != -1) return false;
 	}
-	return true;
+	return true;*/
 }
 
-void PriorityQueueArray::decreaseKey(int place, int newKey)
+void PriorityQueueArray::decreaseKey(int place, float newKey)
 {
 	this->arr[place] = newKey;
 	if (place == this->minIndex) updateMinIndex();

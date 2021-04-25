@@ -1,5 +1,6 @@
 #pragma once
 #include "PriorityQueueHeap.h"
+#include "PriorityQueueArray.h"
 #include "AdjacencyListGraph.h"
 #include "AdjacencyMatrixGraph.h"
 
@@ -34,6 +35,36 @@ public:
 			}
 		}
 		return d[t-1];
+	}
+
+	static int dijkstraWithArray(Graph* G, int s, int t)
+	{
+		int u;
+		Node* v;
+		LinkedList* adjList;
+		int n = G->getNumOfVertex();
+		float* d = new float[n];
+		int* p = new int[n];
+		init(s, d, p, n);
+		PriorityQueueArray minArr(d, n);
+
+		while (!minArr.isEmpty())
+		{
+			u = minArr.deleteMin();
+			adjList = G->getAdjList(u + 1);
+			v = adjList->getHead();
+			while (v != nullptr)
+			{
+				if (d[v->vertex - 1] == -1 || d[v->vertex - 1] > d[u] + v->weight)
+				{
+					d[v->vertex - 1] = d[u] + v->weight;
+					p[v->vertex - 1] = u;
+					minArr.decreaseKey(v->vertex - 1, d[v->vertex - 1]);
+				}
+				v = v->next;
+			}
+		}
+		return d[t - 1];
 	}
 private:
 	static void init(int s, float* d, int* p, int n) 
