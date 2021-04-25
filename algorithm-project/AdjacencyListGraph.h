@@ -11,13 +11,12 @@ private:
 	LinkedList** adjacencyListArray;
 	void MakeEmptyGraph();
 public:
-	AdjacencyListGraph(int n);
+	explicit AdjacencyListGraph(int n);
 	~AdjacencyListGraph();
-	void addEdge(int u, int v, float weight);
-	bool isAdjacent(int u, int v);
-	void removeEdge(int u, int v);
-    LinkedList* getAdjList(int u);
-    LinkedList* getAllEdges();
-	void load(istream& in);
-	void toString();
+	void addEdge(int u, int v, float weight) override;
+	bool isAdjacent(int u, int v) override;
+	void removeEdge(int u, int v) override;
+    LinkedList* getAdjList(int u) override;
+	void load(istream& in) override;
+	void toString() override;
 };

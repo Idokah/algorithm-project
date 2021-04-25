@@ -12,13 +12,13 @@ class AdjacencyMatrixGraph : public Graph
 private:
     int** adjMatrix;
 public:
-    AdjacencyMatrixGraph(int n);
-    bool isAdjacent(int u, int v);
+    explicit AdjacencyMatrixGraph(int n);
+    bool isAdjacent(int u, int v) override;
     void makeEmptyGraph();
-    void load(istream& in);
-    void addEdge(int u, int v, float weight);
-    void removeEdge(int i, int j);
-    void toString();
-    LinkedList* getAdjList(int u);
+    void load(istream& in) override;
+    void addEdge(int u, int v, float weight) override;
+    void removeEdge(int i, int j) override;
+    void toString() override;
+    LinkedList* getAdjList(int u) override;
     ~AdjacencyMatrixGraph();
 };

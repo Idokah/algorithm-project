@@ -107,3 +107,11 @@ void LinkedList::toString()
 bool LinkedList::isEmpty() {
     return (this->getHead() == nullptr);
 }
+
+Edge *LinkedList::getTail() {
+    return this->tail;
+}
+
+void LinkedList::setTail(Edge* newTail) {
+    this->tail = newTail;
+}

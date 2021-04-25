@@ -12,6 +12,7 @@ public:
 	virtual LinkedList* getAdjList(int u) = 0;
 	virtual void load(istream& in) = 0;
 	virtual void toString() = 0;
+	virtual LinkedList* getAllEdges();
 protected:
 	Graph(int n);
 	int n;

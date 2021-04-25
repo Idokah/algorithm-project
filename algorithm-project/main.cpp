@@ -2,6 +2,7 @@
 #include "AdjacencyListGraph.h"
 #include "AdjacencyMatrixGraph.h"
 #include "Dijkstra.h"
+#include "BellmanFord.h"
 
 int main(int argc, char *argv[]){
     ifstream infile(argv[1], ios::binary);
@@ -29,8 +30,7 @@ int main(int argc, char *argv[]){
     infile.close();
     outfile.close();
 
-    //listGraph.getAllEdges();
-
     cout<<Dijkstra::dijkstraWithHeap(&matrixGraph, s, t) << endl;
     cout<<Dijkstra::dijkstraWithHeap(&listGraph, s, t) << endl;
+    cout<<BellmanFord::bellmanFord(&listGraph, s, t) << endl;
 }

@@ -66,17 +66,3 @@ void AdjacencyListGraph::toString()
 		cout << endl;
 	}
 }
-
-LinkedList *AdjacencyListGraph::getAllEdges() {
-    LinkedList* allEdgesList = new LinkedList;
-    LinkedList* currLst;
-    for (int i = 1; i <= this->n; i++) {
-        currLst = getAdjList(i);
-        if (allEdgesList->isEmpty()) allEdgesList = currLst;
-        else {
-            allEdgesList->addNode(currLst->getHead());
-        }
-    }
-    return allEdgesList;
-}
-

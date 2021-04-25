@@ -6,41 +6,47 @@
 static class BellmanFord
 {
 public:
-	static int bellmanFord(Graph* G, int s ,int t)
-	{
+	static int bellmanFord(Graph* G, int s ,int t) {
         int u, v;
-        Edge* vNode;
-        LinkedList* adjList;
+        Edge *edge;
+        LinkedList *adjList = G->getAllEdges();
         int n = G->getNumOfVertex();
         float *d = new float[n];
         int *p = new int[n];
         init(s, d, p, n);
-        for (int i = 0; i < n - 1; ++i)
-        {
-            // running over all the edges
-            for (int u = 0; u < n ; ++i) {
-                adjList = G->getAdjList(u);
-                vNode = adjList->getHead();
-                while (vNode != nullptr)
-                {
-                    v = vNode->dstVertex - 1;
-                    if (d[v] == -1 || (d[v] > d[u] + vNode->weight))
-                    {
-                        d[v] = d[u] + vNode->weight;
-                        p[v] = u;
-                    }
-                    vNode = vNode->next;
+        for (int i = 0; i < n - 1; ++i) {
+            edge = adjList->getHead();
+            while (edge != nullptr) {
+                v = edge->dstVertex - 1;
+                u = edge->srcVertex - 1;
+                if (isImprovingEdge(u, v, edge->weight, d)) {
+                    d[v] = d[u] + edge->weight;
+                    p[v] = u;
                 }
+                edge = edge->next;
             }
         }
 
+        edge = adjList->getHead();
+        while (edge != nullptr)
+        {
+            v = edge->dstVertex - 1;
+            u = edge->srcVertex - 1;
+            if (isImprovingEdge(u, v, edge->weight, d))
+                throw invalid_argument("Negative Cycle");
+            edge = edge->next;
+        }
 
         int distanceToT = d[t-1];
         delete[] d;
         delete[] p;
+        delete adjList;
         return distanceToT;
 	}
 private:
+    static bool isImprovingEdge(int u, int v, float weight, float* d){
+	    return (d[v] == -1 || (d[v] > d[u] + weight));
+	}
 	static void init(int s, float* d, int* p, int n) 
 	{
 		for (int i = 0; i < n; ++i) 

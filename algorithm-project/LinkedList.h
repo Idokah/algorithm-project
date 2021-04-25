@@ -21,7 +21,9 @@ public:
     void addNode(Edge *newNode);
     bool isEmpty();
     Edge* getHead();
+    Edge* getTail();
     void deleteNode(int vertex);
     bool isVertexExist(int vertex);
     void toString();
+    void setTail(Edge* newTail);
 };
