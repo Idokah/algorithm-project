@@ -1,5 +1,4 @@
 #include "PriorityQueueHeap.h"
-#include "main.h"
 //
 //PriorityQueueHeap::PriorityQueueHeap(int max) : heapSize(0), allocated(1), maxSize(max), data(new VertexItem*[max]) {}
 //

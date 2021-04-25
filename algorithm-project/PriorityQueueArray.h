@@ -4,7 +4,7 @@ class PriorityQueueArray
 {
 private:
 	float* arr;
-	int* flagsArr; //flagsArr[i] is 1 if arr[1] is in the queue
+	int* flagsArr; 
 	int deleted;
 	int size;
 	int minIndex;

@@ -20,23 +20,22 @@ void PriorityQueueArray::updateMinIndex()
 
 PriorityQueueArray::PriorityQueueArray(float * arr,int n) : size(n) , deleted(0)
 {
-	this->flagsArr = new int(n);
+	this->flagsArr = new int[n];
+	for (int i = 0; i < this->size; ++i) this->flagsArr[i] = 1;
 	Build(arr);
 }
 PriorityQueueArray::~PriorityQueueArray() {
-	delete[] this->flagsArr;
+	//delete[] this->flagsArr;
 }
 void PriorityQueueArray::Build(float * arr)
 {
 	this->arr = arr;
-	for (int i = 0; i < this->size; ++i) this->flagsArr[i] = 1;
 	this->updateMinIndex();
 }
 
 int PriorityQueueArray::deleteMin()
 {
 	int min= this->arr[this->minIndex];
-	this->arr[this->minIndex] = -1;
 	this->flagsArr[this->minIndex] = 0;
 	this->deleted++;
 	this->updateMinIndex();

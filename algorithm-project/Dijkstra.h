@@ -4,6 +4,18 @@
 #include "AdjacencyListGraph.h"
 #include "AdjacencyMatrixGraph.h"
 
+
+
+template <class T>
+void printArr(T* arr, int size)
+{
+	for (int i = 0; i < size; ++i) {
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
+
+
 static class Dijkstra
 {
 public:
@@ -21,6 +33,8 @@ public:
 		while (!queue.isEmpty())
 		{
 			u = queue.deleteMin();
+			//printArr(d, n);
+			cout << u << " ";
 			adjList = G->getAdjList(u+1);
             vNode = adjList->getHead();
 			while (vNode != nullptr)
@@ -43,32 +57,39 @@ public:
 
 	static int dijkstraWithArray(Graph* G, int s, int t)
 	{
-		int u;
-		Node* v;
+		int u, v;
+		Edge* vNode;
 		LinkedList* adjList;
 		int n = G->getNumOfVertex();
 		float* d = new float[n];
 		int* p = new int[n];
 		init(s, d, p, n);
-		PriorityQueueArray minArr(d, n);
+		PriorityQueueArray queue(d, n);
+		//PriorityQueueHeap queue(n, d);
 
-		while (!minArr.isEmpty())
+		while (!queue.isEmpty())
 		{
-			u = minArr.deleteMin();
+			u = queue.deleteMin();
+			//printArr(d,n);
+			//cout << u << " ";
 			adjList = G->getAdjList(u + 1);
-			v = adjList->getHead();
-			while (v != nullptr)
+			vNode = adjList->getHead();
+			while (vNode != nullptr)
 			{
-				if (d[v->vertex - 1] == -1 || d[v->vertex - 1] > d[u] + v->weight)
+				v = vNode->dstVertex - 1;
+				if (d[v] == -1 || d[v] > d[u] + vNode->weight)
 				{
-					d[v->vertex - 1] = d[u] + v->weight;
-					p[v->vertex - 1] = u;
-					minArr.decreaseKey(v->vertex - 1, d[v->vertex - 1]);
+					d[v] = d[u] + vNode->weight;
+					p[v] = u;
+					queue.decreaseKey(vNode->dstVertex - 1, d[vNode->dstVertex - 1]);
 				}
-				v = v->next;
+				vNode = vNode->next;
 			}
 		}
-		return d[t - 1];
+		int distanceToT = d[t - 1];
+		delete[] d;
+		delete[] p;
+		return distanceToT;
 	}
 private:
 	static void init(int s, float* d, int* p, int n) 
@@ -81,3 +102,4 @@ private:
 		d[s-1] = 0;
 	}
 };
+
