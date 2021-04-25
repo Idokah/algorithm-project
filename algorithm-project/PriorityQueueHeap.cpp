@@ -6,6 +6,18 @@
 //    this->build(n);
 //}
 
+bool isInfinity(float distance) { return (distance == -1); };
+
+bool isNodeBigger(float nodeDistance, float otherDistance)
+{
+    if (isInfinity(otherDistance)) return false;
+    // The other is not infinity
+    if (isInfinity(nodeDistance)) return true;
+    // The other and me are not infinity
+    return (otherDistance < nodeDistance);
+}
+
+
 PriorityQueueHeap::PriorityQueueHeap(int n, float* d)
 {
     this->data = new VertexItem *[n];
@@ -48,11 +60,11 @@ int PriorityQueueHeap::getHeapSize() {
 void PriorityQueueHeap::fixHeap(int node) {
     int min;
     int left = this->left(node);
-    int right = this->right(node);
-    if ((left < heapSize) && (((this->data[left]->distance != -1) && (this->data[left]->distance < data[node]->distance)) || (this->data[left]->distance != -1 && data[node]->distance==-1)))
+    int right = this->right(node); 
+    if ((left < heapSize) && isNodeBigger(this->data[node]->distance,this->data[left]->distance))
         min = left;
     else min = node;
-    if ((right < heapSize) && (((this->data[right]->distance != -1) && (this->data[right]->distance < data[min]->distance)) || (this->data[right]->distance != -1 && data[node]->distance == -1)))
+    if ((right < heapSize) && isNodeBigger(this->data[node]->distance, this->data[right]->distance))
         min = right;
     if (min != node){
         this->swap(node, min);
@@ -109,7 +121,7 @@ void PriorityQueueHeap::makeEmpty() {
 void PriorityQueueHeap::decreaseKey(int place, int newKey){
     int index = place;
     this->data[place]->distance = newKey;
-    while ((index > 0) && (((this->data[parent(index)]->distance > this->data[index]->distance)) || (this->data[parent(index)]->distance == -1 && this->data[index]->distance != -1)))
+    while ((index > 0) && isNodeBigger(this->data[parent(index)]->distance,this->data[index]->distance))
     {
         this->swap(parent(index), index);
         index = parent(index);
