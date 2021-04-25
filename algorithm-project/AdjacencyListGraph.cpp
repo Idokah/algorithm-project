@@ -25,7 +25,7 @@ void AdjacencyListGraph::MakeEmptyGraph()
 
 void AdjacencyListGraph::addEdge(int u, int v, float weight)
 {
-	this->adjacencyListArray[u-1]->addNode(v, weight);
+    this->adjacencyListArray[u - 1]->addNode(weight, v, u);
 }
 
 bool AdjacencyListGraph::isAdjacent(int u, int v)
@@ -65,5 +65,18 @@ void AdjacencyListGraph::toString()
 		this->adjacencyListArray[i]->toString();
 		cout << endl;
 	}
+}
+
+LinkedList *AdjacencyListGraph::getAllEdges() {
+    LinkedList* allEdgesList = new LinkedList;
+    LinkedList* currLst;
+    for (int i = 1; i <= this->n; i++) {
+        currLst = getAdjList(i);
+        if (allEdgesList->isEmpty()) allEdgesList = currLst;
+        else {
+            allEdgesList->addNode(currLst->getHead());
+        }
+    }
+    return allEdgesList;
 }
 
