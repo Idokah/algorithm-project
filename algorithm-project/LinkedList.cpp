@@ -10,6 +10,10 @@ LinkedList::LinkedList()
     tail = nullptr;
 }
 
+LinkedList::LinkedList(LinkedList *pList) {
+    *this = *pList;
+}
+
 LinkedList::~LinkedList()
 {
     Edge* curr = head;
@@ -22,8 +26,13 @@ LinkedList::~LinkedList()
 
 void LinkedList::operator=(const LinkedList& other)
 {
-    this->head = other.head;
-    this->tail = other.tail;
+    this->head = nullptr;
+    this->tail = nullptr;
+    Edge *curr = other.getHead();
+    while (curr != nullptr){
+        this->addNode(curr->weight, curr->dstVertex, curr->srcVertex);
+        curr = curr->next;
+    }
 }
 
 void LinkedList::addNode(float weight, int dstVertex, int srcVertex)
@@ -49,10 +58,11 @@ void LinkedList::addNode(Edge *newNode) {
     }
 }
 
-Edge* LinkedList::getHead()
+Edge* LinkedList::getHead() const
 {
     return this->head;
 }
+
 void LinkedList::deleteNode(int dstVertex)
 {
 
@@ -115,3 +125,5 @@ Edge *LinkedList::getTail() {
 void LinkedList::setTail(Edge* newTail) {
     this->tail = newTail;
 }
+
+

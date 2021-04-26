@@ -2,7 +2,6 @@
 
 int NO_EDGE = -1; // We are assuming all the weight in the graph is not negative
 
-
 // Initialize the matrix to zero
 AdjacencyMatrixGraph::AdjacencyMatrixGraph(int n) : Graph(n)
 {

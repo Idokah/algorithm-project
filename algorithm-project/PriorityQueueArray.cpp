@@ -24,9 +24,11 @@ PriorityQueueArray::PriorityQueueArray(float * arr,int n) : size(n) , deleted(0)
 	for (int i = 0; i < this->size; ++i) this->flagsArr[i] = 1;
 	Build(arr);
 }
+
 PriorityQueueArray::~PriorityQueueArray() {
 	//delete[] this->flagsArr;
 }
+
 void PriorityQueueArray::Build(float * arr)
 {
 	this->arr = arr;

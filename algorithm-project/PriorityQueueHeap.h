@@ -22,8 +22,6 @@ private:
     void fixHeap(int node);
     void swap(int item1, int item2);
 public:
-    //PriorityQueueHeap(int max);
-    //PriorityQueueHeap(VertexItem** arr, int n);
     PriorityQueueHeap(int n, float* d);
     void build();
     ~PriorityQueueHeap();

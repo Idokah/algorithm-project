@@ -8,9 +8,8 @@ AdjacencyListGraph::AdjacencyListGraph(int n) : Graph(n)
 AdjacencyListGraph::~AdjacencyListGraph()
 {
 	for (int i = 0; i < this->n; ++i)
-	{
 		delete (this->adjacencyListArray[i]);
-	}
+	delete[] this->adjacencyListArray;
 }
 
 void AdjacencyListGraph::MakeEmptyGraph()
@@ -40,7 +39,8 @@ void AdjacencyListGraph::removeEdge(int u, int v)
 
 LinkedList* AdjacencyListGraph::getAdjList(int u)
 {
-	return adjacencyListArray[u-1];
+    LinkedList *adjLst = new LinkedList(adjacencyListArray[u-1]);
+    return adjLst;
 }
 
 void AdjacencyListGraph::load(istream& in)

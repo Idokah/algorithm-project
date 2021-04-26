@@ -1,10 +1,4 @@
 #include "PriorityQueueHeap.h"
-//
-//PriorityQueueHeap::PriorityQueueHeap(int max) : heapSize(0), allocated(1), maxSize(max), data(new VertexItem*[max]) {}
-//
-//PriorityQueueHeap::PriorityQueueHeap(VertexItem** arr, int n) : heapSize(n), maxSize(n), allocated(0), data(arr) {
-//    this->build(n);
-//}
 
 bool isInfinity(float distance) { return (distance == -1); };
 
@@ -36,9 +30,9 @@ void PriorityQueueHeap::build() {
 }
 
 PriorityQueueHeap::~PriorityQueueHeap() {
-    if (allocated) delete[] this->data;
-    // else delete this->data;
-    this->data = nullptr;
+    for (int i = 0; i < this->heapSize; ++i)
+        delete data[i];
+    delete[] this->data;
 }
 
 int PriorityQueueHeap::left(int node) {
@@ -84,10 +78,12 @@ int PriorityQueueHeap::deleteMin() {
         exit(1);
     }
     VertexItem* min = data[0];
+    int minVertex = min->vertex;
+    //delete min; // TODO check if needed
     heapSize--;
     data[0] = data[heapSize];
     this->fixHeap(0);
-    return min->vertex;
+    return minVertex;
 }
 
 VertexItem* PriorityQueueHeap::min() {

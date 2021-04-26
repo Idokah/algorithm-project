@@ -34,5 +34,6 @@ int main(int argc, char *argv[]){
     cout<<Dijkstra::dijkstraWithHeap(&listGraph, s, t) << endl;
     cout<<Dijkstra::dijkstraWithArray(&matrixGraph, s, t) << endl;
     cout<<Dijkstra::dijkstraWithArray(&listGraph, s, t) << endl;
+    cout<<BellmanFord::bellmanFord(&matrixGraph, s, t) << endl;
     cout<<BellmanFord::bellmanFord(&listGraph, s, t) << endl;
 }

@@ -48,6 +48,7 @@ public:
 				}
                 vNode = vNode->next;
 			}
+			delete adjList;
 		}
 		int distanceToT = d[t-1];
 		delete[] d;
@@ -85,6 +86,7 @@ public:
 				}
 				vNode = vNode->next;
 			}
+			delete adjList;
 		}
 		int distanceToT = d[t - 1];
 		delete[] d;
