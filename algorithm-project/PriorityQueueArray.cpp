@@ -4,7 +4,6 @@
 void PriorityQueueArray::updateMinIndex()
 {
 	bool firstFound = false;
-	this->minIndex = 0;
 	for (int i = 0; i < this->size; ++i)
 	{
 			if (this->flagsArr[i]) //is in the array
@@ -26,7 +25,7 @@ PriorityQueueArray::PriorityQueueArray(float * arr,int n) : size(n) , deleted(0)
 }
 
 PriorityQueueArray::~PriorityQueueArray() {
-	//delete[] this->flagsArr;
+	delete[] this->flagsArr;
 }
 
 void PriorityQueueArray::Build(float * arr)
@@ -37,11 +36,11 @@ void PriorityQueueArray::Build(float * arr)
 
 int PriorityQueueArray::deleteMin()
 {
-	int min= this->arr[this->minIndex];
-	this->flagsArr[this->minIndex] = 0;
+	int minIndex= this->minIndex;
+	this->flagsArr[this->minIndex] = 0; //delete the min 
 	this->deleted++;
-	this->updateMinIndex();
-	return this->minIndex;
+	this->updateMinIndex(); //update the new one (why this is intersting at all??)
+	return minIndex;
 }
 
 bool PriorityQueueArray::isEmpty()
@@ -57,7 +56,7 @@ bool PriorityQueueArray::isEmpty()
 void PriorityQueueArray::decreaseKey(int place, float newKey)
 {
 	this->arr[place] = newKey;
-	if (place == this->minIndex) updateMinIndex();
+	updateMinIndex();
 }
 
 int PriorityQueueArray::getSize()

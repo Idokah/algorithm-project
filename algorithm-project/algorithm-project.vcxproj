@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="AdjacencyListGraph.cpp" />
     <ClCompile Include="AdjacencyMatrixGraph.cpp" />
+    <ClCompile Include="Dijkstra.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />

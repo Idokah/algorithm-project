@@ -14,11 +14,16 @@ bool isNodeBigger(float nodeDistance, float otherDistance)
 
 PriorityQueueHeap::PriorityQueueHeap(int n, float* d)
 {
-    this->data = new VertexItem *[n];
+    this->data = new VertexItem * [n];
     for (int i = 0; i < n; ++i) {
         data[i] = new VertexItem;
         data[i]->distance = d[i];
         data[i]->vertex = i;
+    }
+    this->vertexIndexArr = new int[n];
+    for (int i = 0; i < n; ++i)
+    {
+        this->vertexIndexArr[i] = i;
     }
     this->heapSize = n;
     this->build();
@@ -67,6 +72,14 @@ void PriorityQueueHeap::fixHeap(int node) {
 }
 
 void PriorityQueueHeap::swap(int item1, int item2) {
+    int item1Index = this->data[item1]->vertex;
+    int item2Index = this->data[item2]->vertex;
+    //swap in index arr
+    int tempIndex = this->vertexIndexArr[item1Index];
+    this->vertexIndexArr[item1Index] = this->vertexIndexArr[item2Index];
+    this->vertexIndexArr[item2Index] = tempIndex;
+    
+    //swap in data arr
     VertexItem* temp = this->data[item2];
     this->data[item2] =  this->data[item1];
     this->data[item1] = temp;
@@ -82,6 +95,7 @@ int PriorityQueueHeap::deleteMin() {
     //delete min; // TODO check if needed
     heapSize--;
     data[0] = data[heapSize];
+    this->vertexIndexArr[data[heapSize]->vertex] = 0;
     this->fixHeap(0);
     return minVertex;
 }
@@ -115,8 +129,8 @@ void PriorityQueueHeap::makeEmpty() {
 
 
 void PriorityQueueHeap::decreaseKey(int place, int newKey){
-    int index = place;
-    this->data[place]->distance = newKey;
+    int index = this->vertexIndexArr[place];
+    this->data[index]->distance = newKey;
     while ((index > 0) && isNodeBigger(this->data[parent(index)]->distance,this->data[index]->distance))
     {
         this->swap(parent(index), index);

@@ -15,9 +15,9 @@ int main(int argc, char *argv[]){
     infile >> numVertices >> s >> t;
 
     AdjacencyMatrixGraph matrixGraph(numVertices);
-    matrixGraph.toString();
+    //matrixGraph.toString();
     matrixGraph.load(infile);
-    cout << endl << endl;
+    //cout << endl << endl;
     matrixGraph.toString();
 
     AdjacencyListGraph listGraph(numVertices);
@@ -34,6 +34,6 @@ int main(int argc, char *argv[]){
     cout<<Dijkstra::dijkstraWithHeap(&listGraph, s, t) << endl;
     cout<<Dijkstra::dijkstraWithArray(&matrixGraph, s, t) << endl;
     cout<<Dijkstra::dijkstraWithArray(&listGraph, s, t) << endl;
-    cout<<BellmanFord::bellmanFord(&matrixGraph, s, t) << endl;
-    cout<<BellmanFord::bellmanFord(&listGraph, s, t) << endl;
+    //cout<<BellmanFord::bellmanFord(&matrixGraph, s, t) << endl;
+    //cout<<BellmanFord::bellmanFord(&listGraph, s, t) << endl;
 }

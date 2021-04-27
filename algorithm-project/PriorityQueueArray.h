@@ -16,6 +16,5 @@ public:
 	int deleteMin();
 	bool isEmpty();
 	void decreaseKey(int place, float newKey);
-	int getSize();
-	
+	int getSize();	
 };

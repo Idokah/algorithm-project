@@ -13,6 +13,7 @@ struct VertexItem {
 class PriorityQueueHeap {
 private:
     VertexItem **data;
+    int* vertexIndexArr;
     int maxSize;
     int heapSize;
     int allocated;

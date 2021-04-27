@@ -46,10 +46,10 @@ LinkedList* AdjacencyListGraph::getAdjList(int u)
 void AdjacencyListGraph::load(istream& in)
 {
 	string line;
-	int i, j, weight;
-	while (!in.eof())
+	int i, j;
+	float weight;
+	while (in >> i >> j >> weight)
 	{
-		in >> i >> j >> weight;
         if (weight < 0 || isAdjacent(i,j)){
             throw invalid_argument("One of the edges in the file is invalid");
         }

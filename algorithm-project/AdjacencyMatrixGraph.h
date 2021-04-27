@@ -10,7 +10,7 @@ using namespace std;
 class AdjacencyMatrixGraph : public Graph
 {
 private:
-    int** adjMatrix;
+    float** adjMatrix;
 public:
     explicit AdjacencyMatrixGraph(int n);
     bool isAdjacent(int u, int v) override;

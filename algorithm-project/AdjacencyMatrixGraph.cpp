@@ -5,9 +5,9 @@ int NO_EDGE = -1; // We are assuming all the weight in the graph is not negative
 // Initialize the matrix to zero
 AdjacencyMatrixGraph::AdjacencyMatrixGraph(int n) : Graph(n)
 {
-    adjMatrix = new int* [this->n];
+    adjMatrix = new float* [this->n];
     for (int i = 0; i < this->n; i++)
-        adjMatrix[i] = new int[this->n];
+        adjMatrix[i] = new float[this->n];
     makeEmptyGraph();
 }
 
@@ -29,10 +29,10 @@ void AdjacencyMatrixGraph::load(istream& in)
 {
     // TODO validate input structure
     string line;
-    int i, j, weight;
-    while (!in.eof( ))
+    int i, j;
+    float weight;
+    while (in >> i >> j >> weight)
     {
-         in >> i >> j >> weight;
         if (weight < 0 || isAdjacent(i,j))
         {
             throw invalid_argument("One of the edges in the file is invalid");
