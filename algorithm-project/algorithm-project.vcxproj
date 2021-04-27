@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="AdjacencyListGraph.cpp" />
     <ClCompile Include="AdjacencyMatrixGraph.cpp" />
+    <ClCompile Include="BellmanFord.cpp" />
     <ClCompile Include="Dijkstra.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="LinkedList.cpp" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="AdjacencyListGraph.h" />
     <ClInclude Include="AdjacencyMatrixGraph.h" />
+    <ClInclude Include="BellmanFord.h" />
     <ClInclude Include="Dijkstra.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="LinkedList.h" />
