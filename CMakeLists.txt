@@ -11,6 +11,7 @@ add_executable(algorithm-project
         algorithm-project/AdjacencyMatrixGraph.cpp
         algorithm-project/AdjacencyMatrixGraph.h
         algorithm-project/Dijkstra.h
+        algorithm-project/Dijkstra.cpp
         algorithm-project/Graph.cpp
         algorithm-project/Graph.h
         algorithm-project/main.cpp
@@ -19,4 +20,5 @@ add_executable(algorithm-project
         algorithm-project/PriorityQueueArray.cpp
         algorithm-project/PriorityQueueArray.h
         algorithm-project/BellmanFord.h
+        algorithm-project/BellmanFord.cpp
         )
