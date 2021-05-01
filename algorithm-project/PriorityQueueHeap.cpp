@@ -92,7 +92,6 @@ int PriorityQueueHeap::deleteMin() {
     }
     VertexItem* min = data[0];
     int minVertex = min->vertex;
-    //delete min; // TODO check if needed
     heapSize--;
     data[0] = data[heapSize];
     this->vertexIndexArr[data[heapSize]->vertex] = 0;

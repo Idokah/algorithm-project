@@ -1,4 +1,5 @@
 #include "BellmanFord.h"
+#define INFINITY -1
 
 float BellmanFord::bellmanFord(Graph* G, int s, int t) {
     int u, v;
@@ -40,7 +41,7 @@ float BellmanFord::bellmanFord(Graph* G, int s, int t) {
 
 bool BellmanFord::isImprovingEdge(int u, int v, float weight, float* d)
 {
-    return (d[v] == -1 || (d[u] != -1 && d[v] > d[u] + weight));
+    return ((d[v] == INFINITY && d[u] != INFINITY) || (d[u] != INFINITY && d[v] > d[u] + weight));
 }
 
 void BellmanFord::init(int s, float* d, int* p, int n)

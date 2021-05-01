@@ -6,13 +6,13 @@
 #include "BellmanFord.h"
 #include "Graph.h"
 
-
+#define INFINITY -1
 typedef float (*Func)(Graph* graph ,int s, int t);
 void shortestPathWithMeasure(Graph* graph, int s, int t, const char* fileName, Func algorithm, const char* algorithmName);
 
-
 int main(int argc, char *argv[]){
-    ifstream infile(argv[1], ios::binary);
+    try {
+        ifstream infile(argv[1], ios::binary);
     ofstream outfile(argv[2], ios::binary);
     if (!infile) {
         throw invalid_argument("Error with infile");
@@ -21,10 +21,11 @@ int main(int argc, char *argv[]){
     int numVertices, s, t;
     infile >> numVertices >> s >> t;
 
+    validateVertexInRange(s, numVertices);
+    validateVertexInRange(t, numVertices);
+
     AdjacencyMatrixGraph matrixGraph(numVertices);
-    //matrixGraph.toString();
     matrixGraph.load(infile);
-    //cout << endl << endl;
     matrixGraph.toString();
 
     AdjacencyListGraph listGraph(numVertices);
@@ -34,6 +35,7 @@ int main(int argc, char *argv[]){
     listGraph.load(infile);
     cout << endl << endl;
     listGraph.toString();
+
     infile.close();
     outfile.close();
 
@@ -43,6 +45,11 @@ int main(int argc, char *argv[]){
     shortestPathWithMeasure(&matrixGraph, s, t, argv[2], Func(Dijkstra::dijkstraWithHeap),"Dijkstra heap");
     shortestPathWithMeasure(&matrixGraph, s, t, argv[2], Func(Dijkstra::dijkstraWithArray), "Dijkstra array");
     shortestPathWithMeasure(&matrixGraph, s, t, argv[2], Func(BellmanFord::bellmanFord), "Bellman Ford ");
+
+    } catch(invalid_argument err) {
+        cout << "there was some error :(" << endl;
+        cout << err.what();
+    }
 }
 
 //this function get graph, source , destination , file name, and algorithm function
@@ -55,10 +62,9 @@ void shortestPathWithMeasure(Graph* graph, int s, int t, const char* fileName, F
     // unsync the I/O of C and C++.     
     ios_base::sync_with_stdio(false);
     float result = algorithm(graph, s, t); // Here you put the name of the function you wish to measure
-
     auto end = chrono::high_resolution_clock::now();
-
-    cout << typeAndFunc << result << endl;
+    string resultToPrint = (result == INFINITY) ? "no route" : to_string(result);
+    cout << typeAndFunc << resultToPrint << endl;
 
     // Calculating total time taken by the program. 
     double time_taken =

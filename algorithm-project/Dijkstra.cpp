@@ -1,6 +1,6 @@
 #include "Dijkstra.h"
-
-float Dijkstra:: dijkstraWithHeap(Graph* G, int s, int t)
+#define INFINITY -1
+float Dijkstra::dijkstraWithHeap(Graph* G, int s, int t)
 {
 	int u, v;
 	Edge* vNode;
@@ -14,12 +14,15 @@ float Dijkstra:: dijkstraWithHeap(Graph* G, int s, int t)
 	while (!queue.isEmpty())
 	{
 		u = queue.deleteMin();
+        // if d[u] is (infinity) its mean that all the rest of the vertices are infinity.
+        // so they cant improve anyone.
+		if (d[u] == INFINITY) break;
 		adjList = G->getAdjList(u + 1);
 		vNode = adjList->getHead();
 		while (vNode != nullptr)
 		{
 			v = vNode->dstVertex - 1;
-			if (d[v] == -1 || d[v] > d[u] + vNode->weight)
+			if (isImprovingEdge(u, v, vNode->weight, d))
 			{
 				d[v] = d[u] + vNode->weight;
 				p[v] = u;
@@ -54,8 +57,8 @@ float Dijkstra::dijkstraWithArray(Graph* G, int s, int t)
 		while (vNode != nullptr)
 		{
 			v = vNode->dstVertex - 1;
-			if (d[v] == -1 || d[v] > d[u] + vNode->weight)
-			{
+			if (isImprovingEdge(u, v, vNode->weight, d))
+                {
 				d[v] = d[u] + vNode->weight;
 				p[v] = u;
 				queue.decreaseKey(vNode->dstVertex - 1, d[vNode->dstVertex - 1]);
@@ -80,4 +83,7 @@ void Dijkstra::init(int s, float* d, int* p, int n)
 	d[s - 1] = 0;
 }
 
-
+bool Dijkstra::isImprovingEdge(int u, int v, float weight, float* d)
+{
+    return ((d[v] == INFINITY && d[u] != INFINITY) || (d[u] != INFINITY && d[v] > d[u] + weight));
+}

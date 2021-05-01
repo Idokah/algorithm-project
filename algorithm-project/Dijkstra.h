@@ -13,6 +13,7 @@ public:
 	static float dijkstraWithArray(Graph* G, int s, int t);
 private:
 	static void init(int s, float* d, int* p, int n);
+    static bool isImprovingEdge(int u, int v, float weight, float* d);
 };
 
 //TODO- delete when finish

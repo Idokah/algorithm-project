@@ -21,4 +21,5 @@ add_executable(algorithm-project
         algorithm-project/PriorityQueueArray.h
         algorithm-project/BellmanFord.h
         algorithm-project/BellmanFord.cpp
-        )
+        algorithm-project/validate_vertex.cpp
+        algorithm-project/validate_vertex.h)

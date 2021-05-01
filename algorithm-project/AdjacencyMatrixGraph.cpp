@@ -27,11 +27,10 @@ bool AdjacencyMatrixGraph::isAdjacent(int u, int v)
 // validate no negative and negative edges
 void AdjacencyMatrixGraph::load(istream& in)
 {
-    // TODO validate input structure
     string line;
     int i, j;
     float weight;
-    while (in >> i >> j >> weight)
+    while (loadEdge(in, i, j, weight))
     {
         if (weight < 0 || isAdjacent(i,j))
         {
@@ -39,6 +38,18 @@ void AdjacencyMatrixGraph::load(istream& in)
         }
         this->addEdge(i, j, weight);
     }
+}
+
+bool AdjacencyMatrixGraph::loadEdge(istream& in, int& i, int&j, float& weight)
+{
+    int count = 0;
+    if (in >> i) count++;
+    if (in >> j) count++;
+    if (in >> weight) count++;
+    if (count != 3 && count != 0){
+        throw invalid_argument("invalid input structure");
+    }
+    return (count != 0);
 }
 
 // Add edges

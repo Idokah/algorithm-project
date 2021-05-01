@@ -2,7 +2,10 @@
 
 AdjacencyListGraph::AdjacencyListGraph(int n) : Graph(n)
 {
-	MakeEmptyGraph();
+    this->adjacencyListArray = new LinkedList* [this->n];
+    for (int i = 0; i < this->n; ++i)
+        this->adjacencyListArray[i] = new LinkedList();
+
 }
 
 AdjacencyListGraph::~AdjacencyListGraph()
@@ -12,14 +15,13 @@ AdjacencyListGraph::~AdjacencyListGraph()
 	delete[] this->adjacencyListArray;
 }
 
-void AdjacencyListGraph::MakeEmptyGraph()
+void AdjacencyListGraph::makeEmptyGraph()
 {
-	// TODO - maybe check if already allocated and free if so 
-	this->adjacencyListArray = new LinkedList* [this->n];
-	for (int i = 0; i < this->n; ++i)
-	{
-		this->adjacencyListArray[i] = new LinkedList();
-	}
+    // freeing old lists
+    for (int i = 0; i < this->n; ++i) {
+        delete (this->adjacencyListArray[i]);
+        this->adjacencyListArray[i] = new LinkedList();
+    }
 }
 
 void AdjacencyListGraph::addEdge(int u, int v, float weight)

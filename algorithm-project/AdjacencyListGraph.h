@@ -3,6 +3,7 @@
 #include <iostream>
 #include "LinkedList.h"
 #include "Graph.h"
+#include "validate_vertex.h"
 
 using namespace std;
 
@@ -10,7 +11,6 @@ class AdjacencyListGraph : public Graph
 {
 private:
 	LinkedList** adjacencyListArray;
-	void MakeEmptyGraph();
 public:
 	explicit AdjacencyListGraph(int n);
 	~AdjacencyListGraph();
@@ -21,4 +21,5 @@ public:
 	void load(istream& in) override;
 	const string getType() override;
 	void toString() override;
+    void makeEmptyGraph();
 };
