@@ -20,5 +20,6 @@ public:
     void removeEdge(int i, int j) override;
     void toString() override;
     LinkedList* getAdjList(int u) override;
+    const string getType() override;
     ~AdjacencyMatrixGraph();
 };

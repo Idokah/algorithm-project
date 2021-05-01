@@ -1,5 +1,6 @@
 #include "LinkedList.h"
 #include <iostream>
+#include <string>
 #pragma once
 class Graph
 {
@@ -13,6 +14,7 @@ public:
 	virtual void load(istream& in) = 0;
 	virtual void toString() = 0;
 	virtual LinkedList* getAllEdges();
+	virtual const string getType() = 0;
 protected:
 	Graph(int n);
 	int n;

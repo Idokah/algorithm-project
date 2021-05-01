@@ -57,6 +57,11 @@ void AdjacencyListGraph::load(istream& in)
 	}
 }
 
+const string AdjacencyListGraph::getType()
+{
+	return "Adjacency";
+}
+
 void AdjacencyListGraph::toString()
 {
 	for (int i = 0; i < this->n; ++i)

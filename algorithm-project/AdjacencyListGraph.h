@@ -19,5 +19,6 @@ public:
 	void removeEdge(int u, int v) override;
     LinkedList* getAdjList(int u) override;
 	void load(istream& in) override;
+	const string getType() override;
 	void toString() override;
 };

@@ -75,6 +75,11 @@ LinkedList* AdjacencyMatrixGraph::getAdjList(int u)
     return lst;
 }
 
+const string AdjacencyMatrixGraph::getType()
+{
+    return "Matrix";
+}
+
 AdjacencyMatrixGraph::~AdjacencyMatrixGraph()
 {
     for (int i = 0; i < this->n; i++)
