@@ -3,7 +3,7 @@
 #include <iostream>
 #include "LinkedList.h"
 #include "Graph.h"
-#include "validate_vertex.h"
+#include "ValidateVertex.h"
 
 using namespace std;
 

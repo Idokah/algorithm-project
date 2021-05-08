@@ -4,6 +4,8 @@
 #include "LinkedList.h"
 #include "Graph.h"
 #include <fstream>
+#include <sstream>
+
 
 using namespace std;
 
@@ -22,5 +24,4 @@ public:
     LinkedList* getAdjList(int u) override;
     const string getType() override;
     ~AdjacencyMatrixGraph();
-    bool loadEdge(istream &in, int &i, int &j, float &weight);
 };

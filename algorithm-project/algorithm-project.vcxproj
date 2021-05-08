@@ -148,6 +148,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PriorityQueueArray.cpp" />
     <ClCompile Include="PriorityQueueHeap.cpp" />
+    <ClCompile Include="ValidateVertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdjacencyListGraph.h" />
@@ -156,9 +157,9 @@
     <ClInclude Include="Dijkstra.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="LinkedList.h" />
-    <ClInclude Include="main.h" />
     <ClInclude Include="PriorityQueueArray.h" />
     <ClInclude Include="PriorityQueueHeap.h" />
+    <ClInclude Include="ValidateVertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

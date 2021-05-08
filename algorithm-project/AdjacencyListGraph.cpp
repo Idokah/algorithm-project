@@ -50,7 +50,7 @@ void AdjacencyListGraph::load(istream& in)
 	string line;
 	int i, j;
 	float weight;
-	while (in >> i >> j >> weight)
+	while (loadEdge(in, i, j, weight))
 	{
         if (weight < 0 || isAdjacent(i,j)){
             throw invalid_argument("One of the edges in the file is invalid");

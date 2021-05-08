@@ -40,17 +40,6 @@ void AdjacencyMatrixGraph::load(istream& in)
     }
 }
 
-bool AdjacencyMatrixGraph::loadEdge(istream& in, int& i, int&j, float& weight)
-{
-    int count = 0;
-    if (in >> i) count++;
-    if (in >> j) count++;
-    if (in >> weight) count++;
-    if (count != 3 && count != 0){
-        throw invalid_argument("invalid input structure");
-    }
-    return (count != 0);
-}
 
 // Add edges
 void AdjacencyMatrixGraph::addEdge(int u, int v, float weight)

@@ -1,7 +1,7 @@
 #include "LinkedList.h"
 #include <iostream>
 #include <string>
-#include "validate_vertex.h"
+#include "ValidateVertex.h"
 
 #pragma once
 class Graph
